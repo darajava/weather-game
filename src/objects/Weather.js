@@ -8,67 +8,68 @@ class Weather {
   }
  
   addRain(){
-    this.rain.loop = true;
-    this.rain.volume = 0.7;
-    this.rain.play();
-    this.thunder.volume = 0.2;
+    this.thunder.volume = 0.1;
     this.thunder.play();
 
-    let rainParticle = this.game.add.bitmapData(15, 50);
- 
-    rainParticle.ctx.rect(0, 0, 15, 1000);
-    rainParticle.ctx.fillStyle = '#7d7d7d';
-    rainParticle.ctx.fill();
+    setTimeout(() => {
+      this.rain.loop = true;
+      this.rain.volume = 0.5;
+      this.rain.play();
 
-    this.emitter = this.game.add.emitter(this.game.world.centerX, -100, 400);
+      let rainParticle = this.game.add.bitmapData(15, 50);
    
-    this.emitter.width = this.game.world.width;
-    this.emitter.angle = 4;
-   
-    this.emitter.makeParticles(rainParticle);
-   
-    this.emitter.minParticleScale = 0.3;
-    this.emitter.maxParticleScale = 0.6;
-   
-    this.emitter.setYSpeed(1200, 2000);
-    this.emitter.setXSpeed(0, 5);
-   
-    this.emitter.minRotation = 0;
-    this.emitter.maxRotation = 1;
-   
-    this.emitter.start(false, 1600, 5, 0);
+      rainParticle.ctx.rect(0, 0, 15, 1000);
+      rainParticle.ctx.fillStyle = '#7d7d7d';
+      rainParticle.ctx.fill();
 
-    let rainParticle2 = this.game.add.bitmapData(15, 50);
- 
-    rainParticle2.ctx.rect(0, 0, 15, 1000);
-    rainParticle2.ctx.fillStyle = '#bbb';
-    rainParticle2.ctx.fill();
+      this.emitter = this.game.add.emitter(this.game.world.centerX, -100, 400);
+     
+      this.emitter.width = this.game.world.width;
+      this.emitter.angle = 4;
+     
+      this.emitter.makeParticles(rainParticle);
+     
+      this.emitter.minParticleScale = 0.3;
+      this.emitter.maxParticleScale = 0.6;
+     
+      this.emitter.setYSpeed(1200, 2000);
+      this.emitter.setXSpeed(0, 5);
+     
+      this.emitter.minRotation = 0;
+      this.emitter.maxRotation = 1;
+     
+      this.emitter.start(false, 1600, 5, 0);
 
-    this.emitter2 = this.game.add.emitter(this.game.world.centerX, -100, 400);
+      let rainParticle2 = this.game.add.bitmapData(15, 50);
    
-    this.emitter2.width = this.game.world.width;
-    this.emitter2.angle = 4;
-   
-    this.emitter2.makeParticles(rainParticle2);
-   
-    this.emitter2.minParticleScale = 0.3;
-    this.emitter2.maxParticleScale = 0.6;
-   
-    this.emitter2.setYSpeed(1200, 2000);
-    this.emitter2.setXSpeed(0, 5);
-   
-    this.emitter2.minRotation = 0;
-    this.emitter2.maxRotation = 1;
-   
-    this.emitter2.start(false, 1600, 5, 0);
+      rainParticle2.ctx.rect(0, 0, 15, 1000);
+      rainParticle2.ctx.fillStyle = '#bbb';
+      rainParticle2.ctx.fill();
 
-    this.emitterGroup = this.game.add.group();
-    this.emitterGroup.add(this.emitter);
-    this.emitterGroup.add(this.emitter2);
+      this.emitter2 = this.game.add.emitter(this.game.world.centerX, -100, 400);
+     
+      this.emitter2.width = this.game.world.width;
+      this.emitter2.angle = 4;
+     
+      this.emitter2.makeParticles(rainParticle2);
+     
+      this.emitter2.minParticleScale = 0.3;
+      this.emitter2.maxParticleScale = 0.6;
+     
+      this.emitter2.setYSpeed(1200, 2000);
+      this.emitter2.setXSpeed(0, 5);
+     
+      this.emitter2.minRotation = 0;
+      this.emitter2.maxRotation = 1;
+     
+      this.emitter2.start(false, 1600, 5, 0);
 
-    console.log('lolol')
+      this.emitterGroup = this.game.add.group();
+      this.emitterGroup.add(this.emitter);
+      this.emitterGroup.add(this.emitter2);
 
-    this.emitterGroup.fixedToCamera = true;
+      this.emitterGroup.fixedToCamera = true;
+    }, 500)
 
   }
  

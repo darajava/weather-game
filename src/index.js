@@ -4,6 +4,8 @@ import GameTitle from 'states/GameTitle';
 import Main from 'states/Main';
 import GameOver from 'states/GameOver';
 
+console.lol = () => {console.log('lol')};
+
 class Game extends Phaser.Game {
 
 	constructor() {

@@ -32,7 +32,7 @@ class DayCycle {
   sunrise(sprite){
     sprite.position.x = this.game.width / 4 * 3;
    
-    this.sunTween = this.game.add.tween(sprite).to( { y: -550 }, this.dayLength, null, true);
+    this.sunTween = this.game.add.tween(sprite).to( { y: -650 }, this.dayLength, null, true);
     this.sunTween.onComplete.add(this.sunset, this);
    
     if(this.shading){
@@ -59,7 +59,7 @@ class DayCycle {
   moonrise(sprite) {
     sprite.position.x = this.game.width / 4 * 3;
  
-    this.moonTween = this.game.add.tween(sprite).to( { y: -450 }, this.dayLength, null, true);
+    this.moonTween = this.game.add.tween(sprite).to( { y: -550 }, this.dayLength, null, true);
     this.moonTween.onComplete.add(this.moonset, this);     
   }
    

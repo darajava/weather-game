@@ -10,6 +10,7 @@ class Background {
 
     // Set the games background colour
     this.game.stage.backgroundColor = '#000';
+    this.backgroundGroup = game.add.group();
 
 
     this.fog1 = this.game.add.tileSprite(0,
@@ -18,6 +19,8 @@ class Background {
       this.game.height,
       'fog1'
     );
+    this.backgroundGroup.add(this.fog1);
+
 
     this.fog2 = this.game.add.tileSprite(0,
       0,
@@ -25,7 +28,7 @@ class Background {
       this.game.height,
       'fog2'
     );
-
+    this.backgroundGroup.add(this.fog2);
 
     this.sunSprite = this.game.add.sprite(this.game.width / 4, -500, 'sun');
     this.moonSprite = this.game.add.sprite(this.game.width - (this.game.width / 4), this.game.height + 500, 'moon');
@@ -39,6 +42,7 @@ class Background {
       this.game.height,
       'stars'
     );
+    this.backgroundGroup.add(this.stars);
 
 
     this.mountainsBack = this.game.add.tileSprite(0,
@@ -47,7 +51,7 @@ class Background {
       this.game.cache.getImage('mountains-back').height,
       'mountains-back'
     );
-
+    this.backgroundGroup.add(this.mountainsBack);
 
     this.mountainsMid1 = this.game.add.tileSprite(0,
       this.game.height - this.game.cache.getImage('mountains-mid1').height,
@@ -55,13 +59,16 @@ class Background {
       this.game.cache.getImage('mountains-mid1').height,
       'mountains-mid1'
     );
+    this.backgroundGroup.add(this.mountainsMid1);
 
+    console.log('jj');
     this.fog3 = this.game.add.tileSprite(0,
       0,
       levelWidth,
       this.game.height,
       'fog3'
     );
+    this.backgroundGroup.add(this.fog3);
 
     // this.backgroundBackgroundSprite = this.game.add.tileSprite(0,
     //   0,
@@ -77,6 +84,8 @@ class Background {
       this.game.cache.getImage('mountains-mid2').height,
       'mountains-mid2' 
     ); 
+    this.backgroundGroup.add(this.mountainsMid2);
+
 
     this.fog4 = this.game.add.tileSprite(0,
       0,
@@ -84,6 +93,7 @@ class Background {
       this.game.height,
       'fog4'
     );
+    this.backgroundGroup.add(this.fog4);
 
     this.backgroundSprite = this.game.add.tileSprite(0,
       0,
@@ -97,9 +107,9 @@ class Background {
     // this.backgroundSprite.events.onInputUp.add(() => this.stopItemRight());
 
     this.fog1.alpha = 0.3; 
-    this.fog2.alpha = 0.1; 
-    this.fog3.alpha = 0.1; 
-    this.fog4.alpha = 0.1; 
+    this.fog2.alpha = 0.2; 
+    this.fog3.alpha = 0.2; 
+    this.fog4.alpha = 0.2; 
 
     let backgroundSprites = [
       // {sprite: this.backgroundBackgroundSprite},
@@ -108,17 +118,19 @@ class Background {
     ];
 
     this.weather = new Weather(this.game);
-    this.weather.addRain();
+    setTimeout(() => {this.weather.addRain()}, 10000);
 
     this.dayCycle.initShading(backgroundSprites);
     this.dayCycle.initSun(this.sunSprite);
     this.dayCycle.initMoon(this.moonSprite);
+
+    this.backgroundGroup.fixedToCamera = true;
   }
 
   update(position) {
-    this.mountainsBack.tilePosition.x = position.x * -0.1;
-    this.mountainsMid1.tilePosition.x = position.x * 2;
-    this.mountainsMid2.tilePosition.x = position.x * 4; 
+    this.mountainsBack.tilePosition.x = -position.x / 14;
+    this.mountainsMid1.tilePosition.x = -position.x / 7;
+    this.mountainsMid2.tilePosition.x = -position.x / 3; 
 
     // this.mountainsBack.alpha = 0;
     // this.mountainsMid1.alpha = 0;
