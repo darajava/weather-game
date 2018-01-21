@@ -137,9 +137,9 @@ class Background {
     // this.mountainsMid2.alpha = 0; 
 
     this.fog1.tilePosition.x += 1; 
-    this.fog2.tilePosition.x -= 5;
-    this.fog3.tilePosition.x += 8; 
-    this.fog4.tilePosition.x -= 4;
+    this.fog2.tilePosition.x -= 2;
+    this.fog3.tilePosition.x += 1.2; 
+    this.fog4.tilePosition.x -= 1.7;
   }
 
  

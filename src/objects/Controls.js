@@ -64,11 +64,15 @@ class Controls {
     this.left.events.onInputDown.add(() => this.turnOn(['left']));
     this.right.events.onInputDown.add(() => this.turnOn(['right']));
 
-    this.jump1.events.onInputOver.add(() => this.turnOn(['jump', 'left']));
+    this.jump1v
     this.jump2.events.onInputOver.add(() => this.turnOn(['jump', 'right']));
 
     this.jump1.events.onInputDown.add(() => this.turnOn(['jump']));
     this.jump2.events.onInputDown.add(() => this.turnOn(['jump']));
+
+    this.jump1.events.onInputUp.dispatch(this.jump1, this.game.input.activePointer, false);
+    // this.jump2.events.onInputUp.dispatch(this.jump2, this.game.input.activePointer, false);
+    console.log('hellodara');
 
     this.weather.events.onInputDown.add(() => this.turnOn(['weather']));
 
@@ -79,6 +83,8 @@ class Controls {
     this.jump2.events.onInputUp.add(() => this.turnOff(['jump', 'right']));
     this.jump1.events.onInputOut.add(() => this.turnOff(['jump']));
     this.jump2.events.onInputOut.add(() => this.turnOff(['jump']));
+
+    console.log(this.jump1);
   }
 
   setPlayerSprite(player) {
@@ -94,6 +100,18 @@ class Controls {
   }
  
   turnOff(key) {
+    if(key[0] === 'jump') {
+      this.jump1.events.onInputOver.removeAll();
+      this.jump2.events.onInputOver.removeAll();
+      this.jump1.events.onInputOver.add(() => this.turnOn(['jump', 'left']));
+      this.jump2.events.onInputOver.add(() => this.turnOn(['jump', 'right']));
+
+      this.jump1.events.onInputOut.removeAll();
+      this.jump2.events.onInputOut.removeAll();
+      this.jump1.events.onInputOut.add(() => this.turnOff(['jump']));
+      this.jump2.events.onInputOut.add(() => this.turnOff(['jump']));
+    }
+
     for (let i = 0; i < key.length; i++) {
       this.outputs[key[i]] = false;
     }

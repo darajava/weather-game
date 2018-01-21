@@ -1,6 +1,7 @@
 import Background from 'objects/Background';
 import Player from 'objects/Player';
 import Controls from 'objects/Controls';
+import Fire from 'objects/Fire';
 
 class Main extends Phaser.State {
 
@@ -51,10 +52,15 @@ class Main extends Phaser.State {
     // this.block.body.setSize(this.block.width, this.block.height - 20, 0, 20);
 
     
+    this.fire = new Fire(this.game, levelWidth - 500, this.game.height - 20);
+
+    this.game.world.bringToTop(this.grass);
 
     // this.backgroundGroup.add(this.grass);
 
     // end level stuff
+
+    // DO THIS NEXT
 
     this.game.camera.follow(this.player.getPlayerSprite(), Phaser.Camera.FOLLOW_LOCKON);
     console.log('hhhj')
