@@ -16,7 +16,7 @@ class Fire {
     SmokeParticle.prototype = Object.create(Phaser.Particle.prototype);
     SmokeParticle.prototype.constructor = SmokeParticle;
 
-    var pSize = game.world.width / 40;
+    var pSize = game.world.width / 65;
 
 
     var bmpd2 = game.add.bitmapData(pSize, pSize);
@@ -27,7 +27,7 @@ class Fire {
       pSize / 2, pSize /2, 2,
       pSize / 2, pSize / 2, pSize * 0.5);
     grd2.addColorStop(0, 'rgba(0, 0, 0, 0.5)');
-    grd2.addColorStop(1, 'rgba(77, 77, 77, 0.2)');
+    grd2.addColorStop(1, 'rgba(0, 0, 0, 0)');
     bmpd2.ctx.fillStyle = grd2;
     
     bmpd2.ctx.arc(pSize / 2, pSize / 2 , pSize / 2, 0, Math.PI * 2);
@@ -61,7 +61,7 @@ class Fire {
       pSize / 2, pSize /2, 2,
       pSize / 2, pSize / 2, pSize * 0.5);
     grd.addColorStop(0, 'rgba(193, 170, 30, 0.6)');
-    grd.addColorStop(1, 'rgba(255, 100, 30, 0.1)');
+    grd.addColorStop(1, 'rgba(255, 90, 20, 0)');
     bmpd.ctx.fillStyle = grd;
     
     bmpd.ctx.arc(pSize / 2, pSize / 2 , pSize / 2, 0, Math.PI * 2);
@@ -76,7 +76,7 @@ class Fire {
     fireEmitter.particleClass = FireParticle;
     // Magic happens here, bleding the colors of each particle
     // generates the bright light effect
-    // fireEmitter.blendMode = PIXI.blendModes.ADD;
+    fireEmitter.blendMode = PIXI.blendModes.ADD;
 
 
 
@@ -87,7 +87,7 @@ class Fire {
     // Make the flames taller than they are wide to simulate the
     // effect of flame tongues
     fireEmitter.setScale(3, 1, 5, 3, 12000, Phaser.Easing.Quintic.Out);
-    fireEmitter.gravity = -2;
+    fireEmitter.gravity = -1;
     fireEmitter.start(false, 2000, 50);
 
 

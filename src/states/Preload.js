@@ -32,9 +32,15 @@ class Preload extends Phaser.State {
 
     this.game.load.audio('thunder', 'assets/thunder.mp3');
     this.game.load.audio('rain', 'assets/rain.ogg');
+    this.game.load.audio('fire', 'assets/fire.ogg');
+    this.game.load.audio('sizzle', 'assets/sizzle.ogg');
     this.game.load.audio('footsteps', 'assets/footsteps.ogg');
     this.game.load.audio('breeze', 'assets/breeze.ogg');
     this.game.load.audio('jumpNoise', 'assets/jump.ogg');
+
+
+    
+    this.game.add.text(0, 0, '',  { font: "900 86px Raleway", fill: '#000' });
   }
 
   create() {

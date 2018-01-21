@@ -5,6 +5,7 @@ class Background {
  
   constructor(game, levelWidth) {
     this.game = game;
+    this.levelWidth = levelWidth;
 
     this.dayCycle = new DayCycle(this.game, 1000 * 60 * 1);
 
@@ -117,8 +118,8 @@ class Background {
       {sprite: this.stars, stars: true},
     ];
 
-    this.weather = new Weather(this.game);
-    setTimeout(() => {this.weather.addRain()}, 10000);
+    // this.weather = new Weather(this.game);
+    // setTimeout(() => {this.weather.addRain()}, 10000);
 
     this.dayCycle.initShading(backgroundSprites);
     this.dayCycle.initSun(this.sunSprite);
@@ -128,6 +129,12 @@ class Background {
   }
 
   update(position) {
+    if (position.x < this.game.width / 2) {
+      position.x = this.game.width / 2;
+    } else if (position.x > this.levelWidth - this.game.width / 2) {
+      position.x = this.levelWidth - this.game.width / 2;
+    }
+
     this.mountainsBack.tilePosition.x = -position.x / 14;
     this.mountainsMid1.tilePosition.x = -position.x / 7;
     this.mountainsMid2.tilePosition.x = -position.x / 3; 

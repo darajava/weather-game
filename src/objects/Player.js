@@ -5,7 +5,7 @@ class Player {
 
     this.controls = controls;
 
-    this.player = this.game.add.sprite(550, this.game.height - 500, 'player');
+    this.player = this.game.add.sprite(150, this.game.height - 250, 'player');
 
     this.game.physics.enable(this.player);
     this.player.body.collideWorldBounds = true;
@@ -24,6 +24,8 @@ class Player {
 
   update() {
     let controls = this.controls.getOutputs();
+
+    if (this.controlDisabled) return;
 
     if (controls.right) {
       this.player.body.velocity.x = 450;
@@ -54,12 +56,19 @@ class Player {
     }
   }
 
+  disableControls() {
+    this.controlDisabled = true;
+    this.player.animations.play('idle', 10, true);
+    this.player.body.velocity.x = 0;
+    this.stopFootsteps();
+  }
+
   playFootsteps() {
     if (this.playingFootsteps) return;
     if (!this.player.body.touching.down) return;
     this.playingFootsteps = true;
     this.footsteps.loop = true;
-    this.footsteps.volume = 0.4;
+    this.footsteps.volume = 0.5;
     this.footsteps.play();
   }
 

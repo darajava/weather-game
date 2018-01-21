@@ -12,9 +12,8 @@ class Weather {
     this.thunder.play();
 
     setTimeout(() => {
-      this.rain.loop = true;
       this.rain.volume = 0.5;
-      this.rain.play();
+      this.rain.fadeIn(2500, true);
 
       let rainParticle = this.game.add.bitmapData(15, 50);
    
@@ -69,7 +68,7 @@ class Weather {
       this.emitterGroup.add(this.emitter2);
 
       this.emitterGroup.fixedToCamera = true;
-    }, 500)
+    }, 2000)
 
   }
  
