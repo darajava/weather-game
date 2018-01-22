@@ -9,15 +9,16 @@ class Background {
 
     this.dayCycle = new DayCycle(this.game, 1000 * 60 * 1);
 
+    this.densityFactor = window.devicePixelRatio / 3;
+
     // Set the games background colour
     this.game.stage.backgroundColor = '#000';
     this.backgroundGroup = game.add.group();
 
-
     this.fog1 = this.game.add.tileSprite(0,
       0,
       levelWidth,
-      this.game.height,
+      this.game.height / this.densityFactor,
       'fog1'
     );
     this.backgroundGroup.add(this.fog1);
@@ -26,7 +27,7 @@ class Background {
     this.fog2 = this.game.add.tileSprite(0,
       0,
       levelWidth,
-      this.game.height,
+      this.game.height / this.densityFactor,
       'fog2'
     );
     this.backgroundGroup.add(this.fog2);
@@ -46,27 +47,26 @@ class Background {
     this.backgroundGroup.add(this.stars);
 
 
-    this.mountainsBack = this.game.add.tileSprite(0,
-      this.game.height - this.game.cache.getImage('mountains-back').height,
+    this.mountains1 = this.game.add.tileSprite(0,
+      this.game.height - this.game.cache.getImage('mountains-back').height * this.densityFactor,
       levelWidth,
       this.game.cache.getImage('mountains-back').height,
       'mountains-back'
     );
-    this.backgroundGroup.add(this.mountainsBack);
+    this.backgroundGroup.add(this.mountains1);
 
-    this.mountainsMid1 = this.game.add.tileSprite(0,
-      this.game.height - this.game.cache.getImage('mountains-mid1').height,
+    this.mountains2 = this.game.add.tileSprite(0,
+      this.game.height - this.game.cache.getImage('mountains-mid1').height * this.densityFactor,
       levelWidth,
       this.game.cache.getImage('mountains-mid1').height,
       'mountains-mid1'
     );
-    this.backgroundGroup.add(this.mountainsMid1);
+    this.backgroundGroup.add(this.mountains2);
 
-    console.log('jj');
     this.fog3 = this.game.add.tileSprite(0,
       0,
       levelWidth,
-      this.game.height,
+      this.game.height / this.densityFactor,
       'fog3'
     );
     this.backgroundGroup.add(this.fog3);
@@ -79,19 +79,19 @@ class Background {
     // );
 
   
-    this.mountainsMid2 = this.game.add.tileSprite(0,
-      this.game.height - this.game.cache.getImage('mountains-mid2').height,
+    this.mountains3 = this.game.add.tileSprite(0,
+      this.game.height - this.game.cache.getImage('mountains-mid2').height * this.densityFactor,
       levelWidth,
       this.game.cache.getImage('mountains-mid2').height,
       'mountains-mid2' 
     ); 
-    this.backgroundGroup.add(this.mountainsMid2);
+    this.backgroundGroup.add(this.mountains3);
 
 
     this.fog4 = this.game.add.tileSprite(0,
       0,
       levelWidth,
-      this.game.height,
+      this.game.height / this.densityFactor,
       'fog4'
     );
     this.backgroundGroup.add(this.fog4);
@@ -126,6 +126,23 @@ class Background {
     this.dayCycle.initMoon(this.moonSprite);
 
     this.backgroundGroup.fixedToCamera = true;
+
+    this.fixDensity();
+  }
+
+  fixDensity() {
+    // console.log(this.game)
+    this.fog1.scale.setTo(this.densityFactor);
+    this.fog2.scale.setTo(this.densityFactor);
+    this.fog3.scale.setTo(this.densityFactor);
+    this.fog4.scale.setTo(this.densityFactor);
+
+    this.mountains1.scale.setTo(this.densityFactor);
+    this.mountains2.scale.setTo(this.densityFactor);
+    this.mountains3.scale.setTo(this.densityFactor);
+
+    this.sunSprite.scale.setTo(this.densityFactor);
+    this.moonSprite.scale.setTo(this.densityFactor);
   }
 
   update(position) {
@@ -135,13 +152,13 @@ class Background {
       position.x = this.levelWidth - this.game.width / 2;
     }
 
-    this.mountainsBack.tilePosition.x = -position.x / 14;
-    this.mountainsMid1.tilePosition.x = -position.x / 7;
-    this.mountainsMid2.tilePosition.x = -position.x / 3; 
+    this.mountains1.tilePosition.x = -position.x / 14;
+    this.mountains2.tilePosition.x = -position.x / 7;
+    this.mountains3.tilePosition.x = -position.x / 3; 
 
-    // this.mountainsBack.alpha = 0;
-    // this.mountainsMid1.alpha = 0;
-    // this.mountainsMid2.alpha = 0; 
+    // this.mountains1.alpha = 0;
+    // this.mountains2.alpha = 0;
+    // this.mountains3.alpha = 0; 
 
     this.fog1.tilePosition.x += 1; 
     this.fog2.tilePosition.x -= 2;

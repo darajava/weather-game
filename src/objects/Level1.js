@@ -8,32 +8,34 @@ class Level1 {
     this.player = player;
     console.log('jdjdj')
     this.levelWidth = levelWidth;
+    this.densityFactor = window.devicePixelRatio / 3;
     
     this.fireSound = game.add.audio('fire');
     this.fireSound.loop = true;
 
     this.sizzle = game.add.audio('sizzle');
-    this.sizzle.volume = 0.17;
+    this.sizzle.volume = 0.27;
     this.sizzle.loop = false;
 
     this.grass = game.add.tileSprite(0,
-      game.height - game.cache.getImage('grass').height,
-      levelWidth,
+      game.height - game.cache.getImage('grass').height * this.densityFactor,
+      levelWidth / this.densityFactor,
       game.cache.getImage('grass').height,
       'grass'
     );
     game.physics.enable(this.grass);
-    // this.grass.body.moves = false;
+    this.grass.body.moves = false;
+    this.grass.body.immovable = true;
     this.grass.body.collideWorldBounds = true;
     this.grass.body.setSize(this.grass.width, this.grass.height - 20, 0, 20);
 
     this.block = game.add.sprite(game.width / 2,
-      game.height - this.grass.body.height - game.cache.getImage('grass').height + 20,
+      game.height - this.grass.body.height - game.cache.getImage('grass').height * this.densityFactor + 20,
       'block'
     );
 
     game.physics.enable(this.block);
-    this.block.body.moves = false;
+    this.block.body.moves = true;
     this.block.body.immovable = true;
     // this.block.body.setSize(this.block.width, this.block.height - 20, 0, 20);
     
@@ -43,10 +45,22 @@ class Level1 {
 
     this.titleText = new TextOverlay(game, 'Fog', 150, true)
 
-    this.text1 = new TextOverlay(game, 'It\'s quite a bit scary,', game.width + game.width / 2)
+    this.text1 = new TextOverlay(game, 'It\'s pretty scary,', game.width + game.width / 2)
     this.text2 = new TextOverlay(game, 'but go in you must,', game.width * 2 + game.width / 2)
-    this.text3 = new TextOverlay(game, 'little tangerine fairies,', game.width * 3 + game.width / 2)
+    this.text3 = new TextOverlay(game, 'these tangerine fairies,', game.width * 3 + game.width / 2)
     this.text4 = new TextOverlay(game, 'will turn you to dust.', game.width * 4 + game.width / 2)
+
+    this.fixDensity();
+  }
+
+  fixDensity() {
+    this.grass.scale.setTo(this.densityFactor, this.densityFactor);
+    this.block.scale.setTo(this.densityFactor, this.densityFactor);
+    // this.text1.scale.setTo(this.densityFactor, this.densityFactor);
+    // this.text2.scale.setTo(this.densityFactor, this.densityFactor);
+    // this.text3.scale.setTo(this.densityFactor, this.densityFactor);
+    // this.text4.scale.setTo(this.densityFactor, this.densityFactor);
+    // this.titleText.scale.setTo(this.densityFactor, this.densityFactor);
   }
 
   update() {
@@ -66,7 +80,7 @@ class Level1 {
       this.sizzlePlaying = true;
     }
 
-    this.titleText.update(this.player.getPlayerSprite().x)
+    // this.titleText.update(this.player.getPlayerSprite().x)
 
     this.text1.update(this.player.getPlayerSprite().x)
     this.text2.update(this.player.getPlayerSprite().x)

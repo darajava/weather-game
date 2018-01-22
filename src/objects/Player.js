@@ -5,6 +5,11 @@ class Player {
 
     this.controls = controls;
 
+    this.densityFactor = window.devicePixelRatio / 3;
+
+    this.speed = 450 * this.densityFactor;
+    this.jumpSpeed = this.game.height * (1/window.devicePixelRatio);
+
     this.player = this.game.add.sprite(150, this.game.height - 250, 'player');
 
     this.game.physics.enable(this.player);
@@ -20,6 +25,13 @@ class Player {
     this.footsteps = game.add.audio('footsteps');
     this.jumpNoise = game.add.audio('jumpNoise');
     this.player.anchor.setTo(0.5, 0.5);
+
+    this.fixDensity();
+  }
+
+  fixDensity() {
+    this.player.scale.setTo(this.densityFactor * 4, this.densityFactor * 4);
+    console.log(this.densityFactor);
   }
 
   update() {
@@ -28,14 +40,14 @@ class Player {
     if (this.controlDisabled) return;
 
     if (controls.right) {
-      this.player.body.velocity.x = 450;
-      this.player.scale.setTo(4, 4);
+      this.player.body.velocity.x = this.speed;
+      this.player.scale.setTo(this.densityFactor * 4, this.densityFactor * 4);
       this.playFootsteps();
       this.player.animations.play('run', 15, true);
     } else if (controls.left) {
-      this.player.body.velocity.x = -450;
+      this.player.body.velocity.x = -this.speed;
       this.playFootsteps();
-      this.player.scale.setTo(-4, 4);
+      this.player.scale.setTo(-this.densityFactor * 4, this.densityFactor * 4);
       this.player.animations.play('run', 15, true);
     } else {
       this.player.body.velocity.x = 0;
@@ -48,7 +60,7 @@ class Player {
     }
 
     if (controls.jump && this.player.body.touching.down && this.game.time.now > this.jumpTimer) {
-      this.player.body.velocity.y = -750;
+      this.player.body.velocity.y = -this.jumpSpeed;
       this.jumpTimer = this.game.time.now + 350;
       this.stopFootsteps();
       this.jumpNoise.volume = 0.15;

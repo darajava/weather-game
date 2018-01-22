@@ -6,7 +6,6 @@ import Level1 from 'objects/Level1';
 class Main extends Phaser.State {
 
   create() {
-
     this.jumpTimer = 0;
 
     //Enable Arcade Physics
