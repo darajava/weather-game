@@ -74,6 +74,7 @@ class DayCycle {
     let maxAlpha = 1;
 
     let colorBlend = {alpha: darker ? 0 : 1};
+        // alert();
  
     this.game.add.tween(colorBlend).to({alpha: darker ? 1 : 0}, this.dayLength, Phaser.Easing.Default, false)
       .onUpdateCallback(() => {
@@ -83,8 +84,16 @@ class DayCycle {
           spriteToTween.sprite.alpha = colorBlend.alpha / 2;
 
         if (spriteToTween.stars) {
-          spriteToTween.sprite.alpha = colorBlend.alpha;
+          if (colorBlend.alpha < 0.5) {
+            spriteToTween.sprite.alpha = 0;            
+          } else { 
+            spriteToTween.sprite.alpha = colorBlend.alpha - 0.5;
+          }
         }
+
+        // alert();
+        console.log('hhhh');
+
 
         let val = 1 - Math.max(colorBlend.alpha, 0.3);
 

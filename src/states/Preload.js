@@ -2,41 +2,41 @@ class Preload extends Phaser.State {
 
   preload() {
     /* Preload required assets */
-    this.game.load.image('backgroundSprite', 'assets/background.png');
+    this.game.load.image('backgroundSprite', '../static/assets/background.png');
 
     // Todo: rename
-    this.game.load.image('mountains-back', 'assets/mountains-back.png');
-    this.game.load.image('mountains-mid1', 'assets/mountains-mid1.png');
-    this.game.load.image('mountains-mid2', 'assets/mountains-mid2.png');
+    this.game.load.image('mountains-back', '../static/assets/mountains-back.png');
+    this.game.load.image('mountains-mid1', '../static/assets/mountains-mid1.png');
+    this.game.load.image('mountains-mid2', '../static/assets/mountains-mid2.png');
 
-    this.game.load.image('stars', 'assets/stars.png');
+    this.game.load.image('stars', '../static/assets/stars.png');
 
-    this.game.load.image('fog1', 'assets/fog1.png');
-    this.game.load.image('fog2', 'assets/fog2.png');
-    this.game.load.image('fog3', 'assets/fog3.png');
-    this.game.load.image('fog4', 'assets/fog4.png');
+    this.game.load.image('fog1', '../static/assets/fog1.png');
+    this.game.load.image('fog2', '../static/assets/fog2.png');
+    this.game.load.image('fog3', '../static/assets/fog3.png');
+    this.game.load.image('fog4', '../static/assets/fog4.png');
 
-    this.game.load.image('sun', 'assets/sun.png');
-    this.game.load.image('moon', 'assets/moon.png');
+    this.game.load.image('sun', '../static/assets/sun.png');
+    this.game.load.image('moon', '../static/assets/moon.png');
 
-    this.game.load.image('right', 'assets/right.png');
-    this.game.load.image('left', 'assets/right.png');
-    this.game.load.image('jump', 'assets/jump.png');
-    this.game.load.image('weather', 'assets/weather.png');
+    this.game.load.image('right', '../static/assets/right.png');
+    this.game.load.image('left', '../static/assets/right.png');
+    this.game.load.image('jump', '../static/assets/jump.png');
+    this.game.load.image('weather', '../static/assets/weather.png');
 
-    this.game.load.image('grass', 'assets/grass.png');
-    this.game.load.image('block', 'assets/block.png');
+    this.game.load.image('grass', '../static/assets/grass.png');
+    this.game.load.image('block', '../static/assets/block.png');
 
 
-    this.game.load.spritesheet('player','assets/player.png', 49, 69, 20);
+    this.game.load.spritesheet('player','../static/assets/player.png', 49, 69, 20);
 
-    this.game.load.audio('thunder', 'assets/thunder.mp3');
-    this.game.load.audio('rain', 'assets/rain.ogg');
-    this.game.load.audio('fire', 'assets/fire.ogg');
-    this.game.load.audio('sizzle', 'assets/sizzle.ogg');
-    this.game.load.audio('footsteps', 'assets/footsteps.ogg');
-    this.game.load.audio('breeze', 'assets/breeze.ogg');
-    this.game.load.audio('jumpNoise', 'assets/jump.ogg');
+    this.game.load.audio('thunder', '../static/assets/thunder.mp3');
+    this.game.load.audio('rain', '../static/assets/rain.ogg');
+    this.game.load.audio('fire', '../static/assets/fire.ogg');
+    this.game.load.audio('sizzle', '../static/assets/sizzle.ogg');
+    this.game.load.audio('footsteps', '../static/assets/footsteps.ogg');
+    this.game.load.audio('breeze', '../static/assets/breeze.ogg');
+    this.game.load.audio('jumpNoise', '../static/assets/jump.ogg');
 
 
     

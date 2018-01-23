@@ -1,99 +1,102 @@
-This template is a modified version of this repository: https://github.com/belohlavek/phaser-es6-boilerplate
+# Phaser + ES6 + Webpack.
+#### A bootstrap project to create games with Phaser + ES6 + Webpack.
 
-It has been modified to include the following states:
+![Phaser+ES6+Webpack](https://raw.githubusercontent.com/lean/phaser-es6-webpack/master/assets/images/phaser-es6-webpack.jpg)
 
-* Boot
-* Preload
-* GameTitle
-* Main
-* GameOver
+[![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
 
-and is set up to auto resize to cover the entire available viewport. It also includes a service worker and manifest file for progressive web app support.
-
-Original documentation below:
-
-# Phaser ES6 Boilerplate
-
-This is a non-professional Phaser template for building standard games using the 
-Phaser framework and ES6/2015.
-
-The original idea was to create a small project that contained a robust gulpfile, 
-a basic example and *some* kind of folder structure.
-
-Codepen example: http://codepen.io/belohlavek/full/aORJVL
 
 ## Features
+- ESLINT with JavaScript Standard Style configuration
+- Next generation of Javascript
+- Browsers are automatically updated as you change project files
+- Webpack ready
+- WebFont Loader
 
-✔ Heavily commented, flexible Gulpfile (that means it uses [Gulp](http://gulpjs.com/)).
+## Typescript 
+If you need typescript support checkout the ```typescript``` branch. Thanks to @MatsMaker
 
-✔ [Browserify](https://github.com/substack/node-browserify) + [Babelify](https://github.com/babel/babelify) (Yes, it uses [Babel](https://babeljs.io/)).
+# Setup
+You'll need to install a few things before you have a working copy of the project.
 
-✔ [Browsersync](http://www.browsersync.io/) = Livereload + Mobile debugging with [Weinre](http://people.apache.org/~pmuellr/weinre-docs/latest/).
+## 1. Clone this repo:
 
-✔ Example: Extending Phaser & modular development.
+Navigate into your workspace directory.
 
-✔ Production ([UglifyJS](https://github.com/mishoo/UglifyJS2)) and Development ([Sourcemaps](https://developer.chrome.com/devtools/docs/javascript-debugging#source-maps)) builds.
+Run:
 
-✔ Did I say ES6? Well.. some ES7 too! ([See Experimental features](https://babeljs.io/docs/usage/experimental/)).
+```git clone https://github.com/lean/phaser-es6-webpack.git```
 
-## Why?
+## 2. Install node.js and npm:
 
-ES6 [is the future](http://www.ecma-international.org/publications/standards/Ecma-262.htm)!
+https://nodejs.org/en/
 
-Anyways, I've been using ES6 for a while in other personal projects, and I currently prefer it over ES5 and Typescript. 
-I found the new Class-based syntax to be a better fit for my developer needs. Unfortunately, the best way to access
-all the features of the new standard is by using a transpiler. This boilerplate is an attempt to reduce the time spent 
-configurating a project and installing dependencies by providing a template that can work as an scaffold for any Phaser game.
 
-## Usage
+## 3. Install dependencies (optionally you can install [yarn](https://yarnpkg.com/)):
 
-You need [Node.js and npm](https://nodejs.org/). You should also have git installed, but it's not mandatory.
+Navigate to the cloned repo's directory.
 
-Clone the repository (or download the ZIP file)
+Run:
 
-`git clone https://github.com/belohlavek/phaser-es6-boilerplate.git`
+```npm install``` 
 
-Install dependencies
+or if you chose yarn, just run ```yarn```
 
-`npm install`
+## 4. Run the development server:
 
-Run a development build...
+Run:
 
-`npm start`
+```npm run dev```
 
-...or a production build.
+This will run a server so you can run the game in a browser. It will also start a watch process, so you can change the source and the process will recompile and refresh the browser automatically.
 
-`npm run production`
+To run the game, open your browser and enter http://localhost:3000 into the address bar.
 
-Development builds will copy `phaser.min.js` together with `phaser.map` and `phaser.js`
-Your ES6 code will be transpiled into ES5 and concatenated into a single file.
-A sourcemap for your code will also be included (by default `game.map.js`).
 
-Production builds will only copy `phaser.min.js`. Your ES6 code will be transpiled and
-minified using UglifyJS.
+## Build for deployment:
 
-Any modification to the files inside the `./src` and `./static` folder will trigger a full page reload.
+Run:
 
-If you modify the contents of other files, please manually restart the server.
+```npm run deploy```
 
-### Modifying `gulpfile.js`
+This will optimize and minimize the compiled bundle.
 
-See [gulpfile.md](https://github.com/belohlavek/phaser-es6-boilerplate/blob/master/gulpfile.md)
+## Deploy for cordova:
+Make sure to uncomment the cordova.js file in the src/index.html and to update config.xml with your informations. (name/description...)
 
-## Changelog (1.0.2)
+More informations about the cordova configuration:
+https://cordova.apache.org/docs/en/latest/config_ref/
 
-* Faster builds (no need to copy static files every time).
-* Live reload now works with static files too!
+There is 3 platforms actually tested and supported : 
+- browser
+- ios
+- android
 
-## Contributing
+First run (ios example):
 
-Please report any bugs or add requests on [Github Issues](https://github.com/belohlavek/phaser-es6-boilerplate/issues).
+```
+npm run cordova
+cordova platform add ios
+cordova run ios
+```
 
-## About me
+Update (ios example):
 
-My name is Daniel Belohlavek: I'm from Buenos Aires, Argentina and I love to derp around and code
-silly snippets. You can follow me on Twitter [@dbhvk](http://twitter.com/dbhvk)
+```
+npm run cordova
+cordova platform update ios
+cordova run ios
+```
 
-## License
+This will optimize and minimize the compiled bundle.
 
-This project is released under the MIT License.
+## Credits
+Big thanks to these great repos:
+
+https://github.com/belohlavek/phaser-es6-boilerplate
+
+https://github.com/cstuncsik/phaser-es6-demo
+
+## Contributors
+
+https://github.com/RenaudROHLINGER

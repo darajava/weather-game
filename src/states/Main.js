@@ -1,7 +1,7 @@
-import Background from 'objects/Background';
-import Player from 'objects/Player';
-import Controls from 'objects/Controls';
-import Level1 from 'objects/Level1';
+import Background from '../objects/Background';
+import Player from '../objects/Player';
+import Controls from '../objects/Controls';
+import Level1 from '../objects/Level1';
 
 class Main extends Phaser.State {
 
