@@ -58,7 +58,7 @@ module.exports = {
       hash: true
     }),
     new CopyWebpackPlugin([
-      { from: 'static/assets', to: 'assets' }
+      { from: 'static/assets', to: 'static/assets' }
     ])
   ],
   module: {
