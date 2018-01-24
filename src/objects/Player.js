@@ -7,10 +7,10 @@ class Player {
 
     this.densityFactor = window.devicePixelRatio / 3;
 
-    this.speed = 2450 * this.densityFactor;
-    this.jumpSpeed = this.game.height * (1/window.devicePixelRatio);
+    this.speed = 550 * this.densityFactor;
+    this.jumpSpeed = 700;
 
-    this.player = this.game.add.sprite(11150, this.game.height - 250, 'player');
+    this.player = this.game.add.sprite(150, this.game.height - 250, 'player');
 
     this.game.physics.enable(this.player);
     this.player.body.collideWorldBounds = true;

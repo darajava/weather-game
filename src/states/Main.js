@@ -7,7 +7,9 @@ class Main extends Phaser.State {
   create() {
     //Enable Arcade Physics
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
-    this.game.physics.arcade.gravity.y = 2050;
+    this.densityFactor = window.devicePixelRatio / 3;
+
+    this.game.physics.arcade.gravity.y = 2050 * this.densityFactor;
 
     // let levelWidth = this.game.width * 5;
 
