@@ -84,16 +84,12 @@ class DayCycle {
           spriteToTween.sprite.alpha = colorBlend.alpha / 2;
 
         if (spriteToTween.stars) {
-          if (colorBlend.alpha < 0.5) {
-            spriteToTween.sprite.alpha = 0;            
+          if (colorBlend.alpha < 0.6) {
+            spriteToTween.sprite.alpha = 0;
           } else { 
-            spriteToTween.sprite.alpha = colorBlend.alpha - 0.5;
+            spriteToTween.sprite.alpha = colorBlend.alpha - 0.6;
           }
         }
-
-        // alert();
-        console.log('hhhh');
-
 
         let val = 1 - Math.max(colorBlend.alpha, 0.3);
 

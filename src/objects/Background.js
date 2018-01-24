@@ -7,7 +7,7 @@ class Background {
     this.game = game;
     this.levelWidth = levelWidth;
 
-    this.dayCycle = new DayCycle(this.game, 1000 * 60 * 1);
+    this.dayCycle = new DayCycle(this.game, 1000 * 60 * 0.21);
 
     this.densityFactor = window.devicePixelRatio / 3;
 

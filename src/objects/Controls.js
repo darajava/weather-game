@@ -92,11 +92,11 @@ class Controls {
   }
 
   turnOn(key) {
-    if(key[0] === 'jump') console.log('jumpon');
     for (let i = 0; i < key.length; i++) {
       this.outputs[key[i]] = true;
     }
-      console.log('setting ' + key + ' to trueee');
+    
+    console.log('setting ' + key + ' to trueee');
   }
  
   turnOff(key) {
