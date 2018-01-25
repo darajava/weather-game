@@ -23,7 +23,7 @@ class LevelStart {
         this.fadeSprite.destroy();
         // this.game.state.start("Level1", true, false);
       });
-    }, 5000);
+    }, 500);
   }
 
 }

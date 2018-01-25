@@ -1,7 +1,10 @@
+import LevelRestart from './LevelRestart';
+
 class Player {
 
-  constructor(game, controls){
+  constructor(game, controls, levelWidth){
     this.game = game;
+    this.levelWidth = levelWidth;
 
     this.controls = controls;
 
@@ -11,6 +14,8 @@ class Player {
     this.jumpSpeed = 700;
 
     this.player = this.game.add.sprite(150, this.game.height - 250, 'player');
+
+    this.sprite = this.player;
 
     this.game.physics.enable(this.player);
     this.player.body.collideWorldBounds = true;
@@ -59,7 +64,7 @@ class Player {
       this.player.animations.play('idle', 10, true);
     }
 
-    if (controls.jump && this.player.body.touching.down && this.game.time.now > this.jumpTimer) {
+    if (controls.jump && this.player.body.touching.down) {
       this.player.body.velocity.y = -this.jumpSpeed;
       this.jumpTimer = this.game.time.now + 350;
       this.stopFootsteps();
@@ -90,8 +95,13 @@ class Player {
     this.footsteps.stop();
   }
 
-  getPlayerSprite() {
-    return this.player;
+  kill() {
+    this.player.anchor.setTo(0.5, 0.6);
+    this.game.add.tween(this.player).to( { angle: 90 }, 50, null, true);
+    this.player.animations.stop(null, true);
+    this.game.world.bringToTop(this.player);
+    let restart = new LevelRestart(this.game, this.levelWidth);
+    restart.restart();
   }
 
 }

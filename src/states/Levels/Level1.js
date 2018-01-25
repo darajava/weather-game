@@ -18,11 +18,11 @@ class Level1 extends Phaser.State {
     this.game.world.setBounds(0, 0, levelWidth, this.game.height);
 
     this.controls = new Controls(this.game);
-    this.player = new Player(this.game, this.controls);
+    this.player = new Player(this.game, this.controls, levelWidth);
 
-    this.controls.setPlayerSprite(this.player.getPlayerSprite());
+    this.controls.setPlayerSprite(this.player.sprite);
 
-    this.game.camera.follow(this.player.getPlayerSprite(), Phaser.Camera.FOLLOW_LOCKON);
+    this.game.camera.follow(this.player.sprite, Phaser.Camera.FOLLOW_LOCKON);
 
     this.breeze = this.game.add.audio('breeze');
     this.breeze.loop = true;
@@ -90,7 +90,7 @@ class Level1 extends Phaser.State {
   }
 
   update() {
-    let distanceFromEnd = this.levelWidth - this.player.getPlayerSprite().x;
+    let distanceFromEnd = this.levelWidth - this.player.sprite.x;
 
     if (!this.firePlaying && distanceFromEnd < this.game.width) {
       this.firePlaying = true;
@@ -108,18 +108,18 @@ class Level1 extends Phaser.State {
       levelEnd.fadeOut('Level2');
     }
 
-    // this.titleText.update(this.player.getPlayerSprite().x)
+    // this.titleText.update(this.player.sprite.x)
 
-    this.text1.update(this.player.getPlayerSprite().x)
-    this.text2.update(this.player.getPlayerSprite().x)
-    this.text3.update(this.player.getPlayerSprite().x)
-    this.text4.update(this.player.getPlayerSprite().x)
-    this.game.physics.arcade.collide(this.player.getPlayerSprite(), this.grass);
-    this.game.physics.arcade.collide(this.player.getPlayerSprite(), this.block);
+    this.text1.update(this.player.sprite.x)
+    this.text2.update(this.player.sprite.x)
+    this.text3.update(this.player.sprite.x)
+    this.text4.update(this.player.sprite.x)
+    this.game.physics.arcade.collide(this.player.sprite, this.grass);
+    this.game.physics.arcade.collide(this.player.sprite, this.block);
     this.game.physics.arcade.collide(this.grass, this.block);
 
     this.player.update();
-    this.background.update({x: this.player.getPlayerSprite().x});
+    this.background.update({x: this.player.sprite.x});
   }
 
 }

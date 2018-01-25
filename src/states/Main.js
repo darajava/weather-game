@@ -20,11 +20,11 @@ class Main extends Phaser.State {
     // this.controls = new Controls(this.game);
     // this.player = new Player(this.game, this.controls);
 
-    // this.controls.setPlayerSprite(this.player.getPlayerSprite());
+    // this.controls.setPlayerSprite(this.player.sprite);
 
     // this.level1 = new Level1(this.game, this.player, levelWidth);
 
-    // this.game.camera.follow(this.player.getPlayerSprite(), Phaser.Camera.FOLLOW_LOCKON);
+    // this.game.camera.follow(this.player.sprite, Phaser.Camera.FOLLOW_LOCKON);
 
     // this.x = 0;
 
@@ -34,7 +34,7 @@ class Main extends Phaser.State {
   // update() {
   //   // this.level1.update();
   //   // this.player.update();
-  //   // this.background.update({x: this.player.getPlayerSprite().x});
+  //   // this.background.update({x: this.player.sprite.x});
   // }
 
 }
