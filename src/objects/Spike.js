@@ -16,7 +16,12 @@ class Spike {
 
     this.spike.anchor.setTo(0.5, 1);
 
+    game.physics.arcade.enable(this.spike);
+    this.spike.body.moves = false;
+
     game.world.bringToTop(this.spike);
+    this.spike.body.setSize(this.spike.width / 4, this.spike.height / 2, this.spike.width / 4 + this.spike.width / 8, 0);
+
 
     this.fixDensity();
   }
@@ -26,6 +31,9 @@ class Spike {
   }
 
   popUp() {
+    this.player.disableControls();
+    this.player.kill();
+
     this.spikeNoise.play();
     let tween = this.game.add.tween(this.spike);
 
@@ -37,16 +45,7 @@ class Spike {
   }
 
   update() {
-    if (
-      !this.dead
-      && Math.abs(this.player.sprite.x - this.spike.x) < this.spike.width / 2
-      && this.player.sprite.body.touching.down
-    ) {
-      this.dead = true;
-      this.popUp();
-      this.player.disableControls();
-      this.player.kill();
-    }
+    this.game.physics.arcade.collide(this.spike, this.player.sprite, () => {this.popUp()}, null, this);
   }
 
 }

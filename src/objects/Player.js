@@ -17,7 +17,7 @@ class Player {
 
     this.sprite = this.player;
 
-    this.game.physics.enable(this.player);
+    this.game.physics.arcade.enable(this.player);
     this.player.body.collideWorldBounds = true;
 
     this.player.body.setSize(this.player.width - 16, this.player.height - 8, 8, 0);
@@ -96,10 +96,10 @@ class Player {
   }
 
   kill() {
-    this.player.anchor.setTo(0.5, 0.6);
-    this.game.add.tween(this.player).to( { angle: 90 }, 50, null, true);
-    this.player.animations.stop(null, true);
     this.game.world.bringToTop(this.player);
+    this.player.anchor.setTo(0.5, 0.6);
+    this.game.add.tween(this.player).to( { angle: 90}, 50, null, true);
+    this.player.animations.stop(null, true);
     let restart = new LevelRestart(this.game, this.levelWidth);
     restart.restart();
   }
