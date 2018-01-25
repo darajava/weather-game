@@ -19,6 +19,8 @@ class Level2 extends Phaser.State {
     this.controls = new Controls(this.game);
     this.player = new Player(this.game, this.controls, levelWidth);
 
+    this.player.sprite.x = this.game.width / 2 + 700;
+
     this.controls.setPlayerSprite(this.player.sprite);
 
     this.game.camera.follow(this.player.sprite, Phaser.Camera.FOLLOW_LOCKON);
@@ -46,18 +48,23 @@ class Level2 extends Phaser.State {
     this.grass.body.setSize(this.grass.width, this.grass.height - 20, 0, 20);
 
     this.block = game.add.sprite(game.width / 2,
-      game.height - this.grass.body.height - game.cache.getImage('grass').height * this.densityFactor + 20,
+      game.height / 2,
       'block'
     );
 
 
     game.physics.enable(this.block);
     this.block.body.moves = true;
-    this.block.body.immovable = true;
+    this.block.body.immovable = false;
+    this.block.body.collideWorldBounds = true;
+    this.block.body.drag.set(500);
 
     this.spikes = [];
-    for (let i = 1; i < 15; i++) {
-      this.spikes.push(new Spike(this.game, this.player, 700 * i, this.game.height - this.grass.body.height));      
+    for (let i = 1; i < 5; i++) {
+      this.spikes.push(new Spike(this.game, this.player, this.game.width + 700 * i, this.game.height - this.grass.body.height));      
+    }
+    for (let i = 1; i < 10; i++) {
+      this.spikes.push(new Spike(this.game, this.player, this.game.width + 700 * 4 + i * 60, this.game.height - this.grass.body.height));      
     }
 
     // game.physics.enable(this.spike);
@@ -75,7 +82,7 @@ class Level2 extends Phaser.State {
 
   fixDensity() {
     this.grass.scale.setTo(this.densityFactor, this.densityFactor);
-    this.block.scale.setTo(this.densityFactor, this.densityFactor);
+    this.block.scale.setTo(this.densityFactor * 2, this.densityFactor * 2);
     // this.text1.scale.setTo(this.densityFactor, this.densityFactor);
     // this.text2.scale.setTo(this.densityFactor, this.densityFactor);
     // this.text3.scale.setTo(this.densityFactor, this.densityFactor);
