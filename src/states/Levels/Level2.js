@@ -47,7 +47,7 @@ class Level2 extends Phaser.State {
     this.grass.body.collideWorldBounds = true;
     this.grass.body.setSize(this.grass.width, this.grass.height - 20, 0, 20);
 
-    this.block = game.add.sprite(game.width / 2,
+    this.block = game.add.sprite(game.width / 8,
       game.height / 2,
       'block'
     );
