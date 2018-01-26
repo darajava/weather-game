@@ -52,12 +52,11 @@ class Level2 extends Phaser.State {
       'block'
     );
 
-
     game.physics.enable(this.block);
     this.block.body.moves = true;
     this.block.body.immovable = false;
     this.block.body.collideWorldBounds = true;
-    this.block.body.drag.set(100);
+    this.block.body.drag.set(200);
 
     this.spikes = [];
     for (let i = 1; i < 5; i++) {
