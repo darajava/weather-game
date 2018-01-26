@@ -10,8 +10,10 @@ import LevelStart from '../../objects/LevelStart';
 class Level2 extends Phaser.State {
 
   create() {
-    let levelWidth = this.game.width * 5;
+    let levelWidth = this.game.width * 8;
     
+    window.game = this.game;
+
     this.background = new Background(this.game, levelWidth);
 
     this.game.world.setBounds(0, 0, levelWidth, this.game.height);
@@ -19,7 +21,7 @@ class Level2 extends Phaser.State {
     this.controls = new Controls(this.game);
     this.player = new Player(this.game, this.controls, levelWidth);
 
-    this.player.sprite.x = this.game.width / 2 + 700;
+    this.player.sprite.x = this.game.width;
 
     this.controls.setPlayerSprite(this.player.sprite);
 
@@ -47,8 +49,9 @@ class Level2 extends Phaser.State {
     this.grass.body.collideWorldBounds = true;
     this.grass.body.setSize(this.grass.width, this.grass.height - 20, 0, 20);
 
-    this.block = game.add.sprite(game.width / 8,
-      game.height / 2,
+    this.blockInitPos = game.width / 2 - game.cache.getImage('block').height * this.densityFactor * 7;
+    this.block = game.add.sprite(this.blockInitPos,
+      game.height * 0.8,
       'block'
     );
 
@@ -56,15 +59,22 @@ class Level2 extends Phaser.State {
     this.block.body.moves = true;
     this.block.body.immovable = false;
     this.block.body.collideWorldBounds = true;
-    this.block.body.drag.set(200);
+    // this.block.body.drag.set(200);
 
     this.spikes = [];
-    for (let i = 1; i < 5; i++) {
-      this.spikes.push(new Spike(this.game, this.player, this.game.width + 700 * i, this.game.height - this.grass.body.height));      
+    let spacing = 1100 * this.densityFactor;
+    let lastPos = (this.game.width + this.game.width / 2);
+    for (let i = 1; i < 35; i++) {
+      this.spikes.push(new Spike(this.game, this.player, lastPos, this.game.height - this.grass.body.height));      
+      lastPos += spacing;
+      spacing *= 0.9;
     }
-    for (let i = 1; i < 10; i++) {
-      this.spikes.push(new Spike(this.game, this.player, this.game.width + 700 * 4 + i * 60, this.game.height - this.grass.body.height));      
-    }
+
+    // // spacing = 30 * this.densityFactor;
+    // console.log(spacing);
+    // for (let i = 25; i < 35; i++) {
+    //   this.spikes.push(new Spike(this.game, this.player, this.game.width + this.game.width / 2 + spacing * i, this.game.height - this.grass.body.height));      
+    // }
 
     // game.physics.enable(this.spike);
     // this.spike.body.moves = true;
@@ -73,15 +83,20 @@ class Level2 extends Phaser.State {
     
     game.world.bringToTop(this.grass);
 
-    this.fixDensity();
 
     let levelStart = new LevelStart(this.game, this.levelWidth);
     levelStart.fadeIn();
+
+    this.text1 = new TextOverlay(game, 'Don\'t try to jump these', 2 * game.width + game.width / 2)
+    this.text2 = new TextOverlay(game, 'I said don\'t', 1.7 * game.width * 2 + game.width / 2)
+    this.text3 = new TextOverlay(game, 'Nice job Eddie!', 3 * game.width * 2 + game.width / 2)
+    
+    this.fixDensity();
   }
 
   fixDensity() {
     this.grass.scale.setTo(this.densityFactor, this.densityFactor);
-    this.block.scale.setTo(this.densityFactor * 4, this.densityFactor * 1.5);
+    this.block.scale.setTo(this.densityFactor * 7, this.densityFactor * 1.5);
     // this.text1.scale.setTo(this.densityFactor, this.densityFactor);
     // this.text2.scale.setTo(this.densityFactor, this.densityFactor);
     // this.text3.scale.setTo(this.densityFactor, this.densityFactor);
@@ -89,14 +104,34 @@ class Level2 extends Phaser.State {
     // this.titleText.scale.setTo(this.densityFactor, this.densityFactor);
   }
 
+  updatePlayerVelocity() {
+    console.log('touching');
+    if (this.block.body.touching.up) {
+      this.player.addXVel(this.block.body.velocity.x);
+    }
+  }
+
   update() {
     let distanceFromEnd = this.levelWidth - this.player.sprite.x;
 
+    if (this.block.body.velocity.x > this.player.pushSpeed) {
+      this.block.body.velocity.x = this.player.pushSpeed;
+    }
+
+    if (this.block.body.x < this.blockInitPos) {
+      this.block.body.x = this.blockInitPos;
+      this.block.body.velocity.x = 0;
+    }
+
     this.game.physics.arcade.collide(this.player.sprite, this.grass);
-    this.game.physics.arcade.collide(this.player.sprite, this.block);
+    this.player.addXVel(0);
+    this.game.physics.arcade.collide(this.player.sprite, this.block, () => {this.updatePlayerVelocity()});
     this.game.physics.arcade.collide(this.grass, this.block);
 
     this.player.update();
+    this.text1.update(this.player.sprite.x);
+    this.text2.update(this.player.sprite.x);
+    this.text3.update(this.player.sprite.x);
     this.background.update({x: this.player.sprite.x});
 
     for (let i = 0; i < this.spikes.length; i++)
