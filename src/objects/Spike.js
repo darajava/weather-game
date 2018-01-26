@@ -12,7 +12,7 @@ class Spike {
     this.spike = game.add.sprite(x, y + (game.cache.getImage('spike').height * this.densityFactor) * 3 - 60 * this.densityFactor, 'spike');
 
     this.spikeNoise = game.add.audio('spike');
-    this.spikeNoise.volume = 0.7;
+    this.spikeNoise.volume = 1;
 
     this.spike.anchor.setTo(0.5, 1);
 

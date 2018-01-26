@@ -8,11 +8,11 @@ class Weather {
   }
  
   addRain(){
-    this.thunder.volume = 0.1;
+    this.thunder.volume = 0.3;
     this.thunder.play();
 
     setTimeout(() => {
-      this.rain.volume = 0.5;
+      this.rain.volume = 0.7;
       this.rain.fadeIn(2500, true);
 
       let rainParticle = this.game.add.bitmapData(15, 50);

@@ -27,7 +27,7 @@ class Level2 extends Phaser.State {
 
     this.breeze = this.game.add.audio('breeze');
     this.breeze.loop = true;
-    this.breeze.volume = 0.3;
+    this.breeze.volume = 0.5;
     this.breeze.play();
 
     let game = this.game;
@@ -57,7 +57,7 @@ class Level2 extends Phaser.State {
     this.block.body.moves = true;
     this.block.body.immovable = false;
     this.block.body.collideWorldBounds = true;
-    this.block.body.drag.set(200);
+    this.block.body.drag.set(100);
 
     this.spikes = [];
     for (let i = 1; i < 5; i++) {

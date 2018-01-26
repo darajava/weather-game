@@ -85,7 +85,7 @@ class Player {
       this.player.body.velocity.y = -this.jumpSpeed;
       this.jumpTimer = this.game.time.now + 350;
       this.stopFootsteps();
-      this.jumpNoise.volume = 0.15;
+      this.jumpNoise.volume = 0.35;
       this.jumpNoise.play();
     }
 
@@ -108,7 +108,7 @@ class Player {
     if (!this.player.body.touching.down) return;
     this.playingFootsteps = true;
     this.footsteps.loop = true;
-    this.footsteps.volume = 0.5;
+    this.footsteps.volume = 0.8;
     this.footsteps.play();
   }
 

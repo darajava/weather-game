@@ -26,7 +26,7 @@ class Level1 extends Phaser.State {
 
     this.breeze = this.game.add.audio('breeze');
     this.breeze.loop = true;
-    this.breeze.volume = 0.3;
+    this.breeze.volume = 0.5;
     this.breeze.play();
 
     let game = this.game;
@@ -38,7 +38,7 @@ class Level1 extends Phaser.State {
     this.fireSound.loop = true;
 
     this.sizzle = game.add.audio('sizzle');
-    this.sizzle.volume = 0.27;
+    this.sizzle.volume = 0.5;
     this.sizzle.loop = false;
 
     this.grass = game.add.tileSprite(0,
