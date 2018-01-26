@@ -10,7 +10,10 @@ class Player {
 
     this.densityFactor = window.devicePixelRatio / 3;
 
-    this.speed = 550 * this.densityFactor;
+    this.maxSpeed = 550 * this.densityFactor;
+    this.speed = this.maxSpeed;
+    this.pushSpeed = this.speed / 2;
+
     this.jumpSpeed = 700;
 
     this.player = this.game.add.sprite(150, this.game.height - 250, 'player');
@@ -44,20 +47,34 @@ class Player {
 
     if (this.controlDisabled) return;
 
+    let acceleration = 30 * this.densityFactor;
+
     if (controls.right) {
-      this.player.body.velocity.x = this.speed;
+      this.player.body.velocity.x += acceleration;
+      if (this.player.body.velocity.x > this.speed) {
+        this.player.body.velocity.x = this.speed;
+      }
       this.player.scale.setTo(this.densityFactor * 4, this.densityFactor * 4);
       this.playFootsteps();
       this.player.animations.play('run', 15, true);
     } else if (controls.left) {
-      this.player.body.velocity.x = -this.speed;
+      this.player.body.velocity.x -= acceleration;
+      if (this.player.body.velocity.x < -this.speed) {
+        this.player.body.velocity.x = -this.speed;
+      }
       this.playFootsteps();
       this.player.scale.setTo(-this.densityFactor * 4, this.densityFactor * 4);
       this.player.animations.play('run', 15, true);
     } else {
-      this.player.body.velocity.x = 0;
-      this.stopFootsteps();
-      this.player.animations.play('idle', 10, true);
+      if (this.player.body.velocity.x < -acceleration) {
+        this.player.body.velocity.x += acceleration;
+      } else if (this.player.body.velocity.x > acceleration) {
+        this.player.body.velocity.x -= acceleration;
+      } else {
+        this.player.body.velocity.x = 0;
+        this.stopFootsteps();
+        this.player.animations.play('idle', 10, true);
+      }
     }
 
     if (!this.player.body.touching.down) {
@@ -70,6 +87,12 @@ class Player {
       this.stopFootsteps();
       this.jumpNoise.volume = 0.15;
       this.jumpNoise.play();
+    }
+
+    if (this.player.body.touching.left || this.player.body.touching.right) {
+      this.speed = this.pushSpeed;
+    } else {
+      this.speed = this.maxSpeed;
     }
   }
 
@@ -98,6 +121,7 @@ class Player {
   kill() {
     this.game.world.bringToTop(this.player);
     this.player.anchor.setTo(0.5, 0.6);
+    this.player.body.velocity.y = 0;
     this.game.add.tween(this.player).to( { angle: 90}, 50, null, true);
     this.player.animations.stop(null, true);
     let restart = new LevelRestart(this.game, this.levelWidth);

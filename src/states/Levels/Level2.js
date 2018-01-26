@@ -57,7 +57,7 @@ class Level2 extends Phaser.State {
     this.block.body.moves = true;
     this.block.body.immovable = false;
     this.block.body.collideWorldBounds = true;
-    this.block.body.drag.set(500);
+    this.block.body.drag.set(200);
 
     this.spikes = [];
     for (let i = 1; i < 5; i++) {
@@ -82,7 +82,7 @@ class Level2 extends Phaser.State {
 
   fixDensity() {
     this.grass.scale.setTo(this.densityFactor, this.densityFactor);
-    this.block.scale.setTo(this.densityFactor * 2, this.densityFactor * 2);
+    this.block.scale.setTo(this.densityFactor * 4, this.densityFactor * 1.5);
     // this.text1.scale.setTo(this.densityFactor, this.densityFactor);
     // this.text2.scale.setTo(this.densityFactor, this.densityFactor);
     // this.text3.scale.setTo(this.densityFactor, this.densityFactor);

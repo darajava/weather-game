@@ -31,6 +31,9 @@ class Spike {
   }
 
   popUp() {
+    if (this.dead) return;
+
+    this.dead = true;
     this.player.disableControls();
     this.player.kill();
 
@@ -45,6 +48,7 @@ class Spike {
   }
 
   update() {
+    this.game.debug.body(this.spike);
     this.game.physics.arcade.collide(this.spike, this.player.sprite, () => {this.popUp()}, null, this);
   }
 
