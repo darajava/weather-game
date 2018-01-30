@@ -2,6 +2,7 @@ import Background from '../../objects/Background';
 import Player from '../../objects/Player';
 import Controls from '../../objects/Controls';
 import Spike from '../../objects/Spike';
+import Fire from '../../objects/Fire';
 import TextOverlay from '../../objects/TextOverlay';
 import LevelEnd from '../../objects/LevelEnd';
 import LevelStart from '../../objects/LevelStart';
@@ -10,7 +11,7 @@ import LevelStart from '../../objects/LevelStart';
 class Level2 extends Phaser.State {
 
   create() {
-    let levelWidth = this.game.width * 8;
+    let levelWidth = this.game.width * 6;
     
     window.game = this.game;
 
@@ -81,6 +82,7 @@ class Level2 extends Phaser.State {
     // this.spike.body.immovable = true ;
     // this.spike.body.setSize(this.spike.width, this.block.height - 20, 0, 20);
     
+    this.fire = new Fire(game, levelWidth - 500, game.height - 20);
     game.world.bringToTop(this.grass);
 
 
@@ -89,7 +91,7 @@ class Level2 extends Phaser.State {
 
     this.text1 = new TextOverlay(game, 'Don\'t try to jump these', 2 * game.width + game.width / 2)
     this.text2 = new TextOverlay(game, 'I said don\'t', 1.7 * game.width * 2 + game.width / 2)
-    this.text3 = new TextOverlay(game, 'Nice job Eddie!', 3 * game.width * 2 + game.width / 2)
+
     
     this.fixDensity();
   }
@@ -131,8 +133,16 @@ class Level2 extends Phaser.State {
     this.player.update();
     this.text1.update(this.player.sprite.x);
     this.text2.update(this.player.sprite.x);
-    this.text3.update(this.player.sprite.x);
+    // this.text3.update(this.player.sprite.x);
     this.background.update({x: this.player.sprite.x});
+
+    if (distanceFromEnd < 500 && !this.sizzlePlaying) {
+      // this.sizzle.play();
+      this.player.disableControls();
+      this.sizzlePlaying = true;
+      let levelEnd = new LevelEnd(this.game, this.levelWidth);
+      levelEnd.fadeOut('Level1');
+    }
 
     for (let i = 0; i < this.spikes.length; i++)
       this.spikes[i].update();

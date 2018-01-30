@@ -105,7 +105,8 @@ class Level1 extends Phaser.State {
       this.player.disableControls();
       this.sizzlePlaying = true;
       let levelEnd = new LevelEnd(this.game, this.levelWidth);
-      levelEnd.fadeOut('Level2');
+      alert('YOU WIN! GAME OVER LOL');
+      // levelEnd.fadeOut('Level2');
     }
 
     // this.titleText.update(this.player.sprite.x)

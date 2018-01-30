@@ -49,7 +49,8 @@ class Spike {
 
   update() {
     this.game.debug.body(this.spike);
-    this.game.physics.arcade.collide(this.spike, this.player.sprite, () => {this.popUp()}, null, this);
+    if(!this.dead)
+      this.game.physics.arcade.collide(this.spike, this.player.sprite, () => {this.popUp()}, null, this);
   }
 
 }

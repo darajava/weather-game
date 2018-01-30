@@ -118,8 +118,8 @@ class Background {
       {sprite: this.stars, stars: true},
     ];
 
-    // this.weather = new Weather(this.game);
-    // setTimeout(() => {this.weather.addRain()}, 10000);
+    this.weather = new Weather(this.game);
+    setTimeout(() => {this.weather.addRain()}, 10000);
 
     this.dayCycle.initShading(backgroundSprites);
     this.dayCycle.initSun(this.sunSprite);

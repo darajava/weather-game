@@ -12,6 +12,12 @@ class Game extends Phaser.Game {
 
     super(window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio, Phaser.CANVAS);
 
+
+    if (window.innerWidth < window.innerHeight) {
+        alert('please load this game in landscape mode');
+        document.location = document.location;
+    }
+
     this.state.add('Boot', Boot, false);
     this.state.add('Preload', Preload, false);
     this.state.add('GameTitle', GameTitle, false);
