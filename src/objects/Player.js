@@ -12,13 +12,12 @@ class Player {
 
     this.densityFactor = window.devicePixelRatio / 3;
 
-    this.maxSpeed = 750 * this.densityFactor;
+    this.maxSpeed = 850 * this.densityFactor;
     this.speed = this.maxSpeed;
     this.pushSpeed = this.speed * 0.7;
-    this.jumpSpeed = 700;
+    this.jumpSpeed = 700 * this.densityFactor;
 
     this.player = this.game.add.sprite(150, this.game.height - 250, 'player');
-
     this.sprite = this.player;
 
     this.game.physics.arcade.enable(this.player);
@@ -90,6 +89,10 @@ class Player {
 
     if (!this.player.body.touching.down) {
       this.player.animations.play('idle', 10, true);
+    }
+
+    if (this.player.body.velocity.y > 300) {
+      this.player.body.velocity.y = 300;
     }
 
     if (controls.jump && this.player.body.touching.down) {

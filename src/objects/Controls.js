@@ -69,10 +69,8 @@ class Controls {
 
     this.jump1.events.onInputDown.add(() => this.turnOn(['jump']));
     this.jump2.events.onInputDown.add(() => this.turnOn(['jump']));
-
-    this.jump1.events.onInputUp.dispatch(this.jump1, this.game.input.activePointer, false);
-    // this.jump2.events.onInputUp.dispatch(this.jump2, this.game.input.activePointer, false);
-    console.log('hellodara');
+    this.jump1.events.onInputOver.add(() => this.turnOn(['jump', 'left']));
+    this.jump2.events.onInputOver.add(() => this.turnOn(['jump', 'right']));
 
     this.weather.events.onInputDown.add(() => this.turnOn(['weather']));
 
@@ -84,6 +82,13 @@ class Controls {
     this.jump1.events.onInputOut.add(() => this.turnOff(['jump']));
     this.jump2.events.onInputOut.add(() => this.turnOff(['jump']));
 
+    // Force out on up https://github.com/photonstorm/phaser-ce/issues/443
+    this.game.input.onUp.add((pointer) => {
+      console.log(this.jump1.input)
+      this.jump1.input._pointerOutHandler(pointer);
+      this.jump2.input._pointerOutHandler(pointer);
+    }, null, 1);
+    
     console.log(this.jump1);
   }
 
@@ -100,17 +105,17 @@ class Controls {
   }
  
   turnOff(key) {
-    if(key[0] === 'jump') {
-      this.jump1.events.onInputOver.removeAll();
-      this.jump2.events.onInputOver.removeAll();
-      this.jump1.events.onInputOver.add(() => this.turnOn(['jump', 'left']));
-      this.jump2.events.onInputOver.add(() => this.turnOn(['jump', 'right']));
+    // if(key[0] === 'jump') {
+    //   this.jump1.events.onInputOver.removeAll();
+    //   this.jump2.events.onInputOver.removeAll();
+    //   this.jump1.events.onInputOver.add(() => this.turnOn(['jump', 'left']));
+    //   this.jump2.events.onInputOver.add(() => this.turnOn(['jump', 'right']));
 
-      this.jump1.events.onInputOut.removeAll();
-      this.jump2.events.onInputOut.removeAll();
-      this.jump1.events.onInputOut.add(() => this.turnOff(['jump']));
-      this.jump2.events.onInputOut.add(() => this.turnOff(['jump']));
-    }
+    //   this.jump1.events.onInputOut.removeAll();
+    //   this.jump2.events.onInputOut.removeAll();
+    //   this.jump1.events.onInputOut.add(() => this.turnOff(['jump']));
+    //   this.jump2.events.onInputOut.add(() => this.turnOff(['jump']));
+    // }
 
     for (let i = 0; i < key.length; i++) {
       this.outputs[key[i]] = false;

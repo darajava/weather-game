@@ -89,8 +89,18 @@ class Level2 extends Phaser.State {
     let levelStart = new LevelStart(this.game, this.levelWidth);
     levelStart.fadeIn();
 
-    this.text1 = new TextOverlay(game, 'Don\'t try to jump these', 2 * game.width + game.width / 2)
-    this.text2 = new TextOverlay(game, 'I said don\'t', 1.7 * game.width * 2 + game.width / 2)
+    this.oldtext = [
+      'Don\'t try jumping these',
+      'I said don\'t',
+    ]
+
+    this.newtext = [
+      '',
+      '',
+    ]
+
+    this.text1 = new TextOverlay(game, this.oldtext[0], 2 * game.width + game.width / 2)
+    this.text2 = new TextOverlay(game, this.oldtext[1], 1.7 * game.width * 2 + game.width / 2)
 
     
     this.fixDensity();
@@ -109,11 +119,16 @@ class Level2 extends Phaser.State {
   updatePlayerVelocity() {
     console.log('touching');
     if (this.block.body.touching.up) {
+      this.text1.setText(this.newtext[0]);
+      this.text2.setText(this.newtext[1]);
       this.player.addXVel(this.block.body.velocity.x);
     }
   }
 
   update() {
+    this.text1.setText(this.oldtext[0]);
+    this.text2.setText(this.oldtext[1]);
+
     let distanceFromEnd = this.levelWidth - this.player.sprite.x;
 
     if (this.block.body.velocity.x > this.player.pushSpeed) {
@@ -127,7 +142,7 @@ class Level2 extends Phaser.State {
 
     this.game.physics.arcade.collide(this.player.sprite, this.grass);
     this.player.addXVel(0);
-    this.game.physics.arcade.collide(this.player.sprite, this.block, () => {this.updatePlayerVelocity()});
+    this.game.physics.arcade.collide(this.block, this.player.sprite, () => {this.updatePlayerVelocity()});
     this.game.physics.arcade.collide(this.grass, this.block);
 
     this.player.update();

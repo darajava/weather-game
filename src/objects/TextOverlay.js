@@ -5,7 +5,7 @@ class TextOverlay {
     this.game = game;
     this.densityFactor = window.devicePixelRatio / 3;
 
-    this.text = game.add.text(position, game.height/4, text,  { font: "900 86px Raleway", fill: '#000' });
+    this.text = game.add.text(position, game.height / 4, text,  { font: "900 86px Raleway", fill: '#000' });
     this.text.fontSize = 200 * this.densityFactor;
 
     this.text.anchor.setTo(0.5, 0.5);
@@ -38,6 +38,10 @@ class TextOverlay {
 
     // console.log(distance);
     // console.log(alpha);
+  }
+
+  setText(text) {
+    this.text.setText(text);
   }
 
 }
