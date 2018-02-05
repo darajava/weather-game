@@ -31,12 +31,14 @@ class Preload extends Phaser.State {
 
 
     this.game.load.spritesheet('player','../static/assets/player.png', 49, 69, 20);
+    this.game.load.spritesheet('trolly','../static/assets/trolly.png', 446, 276, 20);
 
     this.game.load.audio('thunder', '../static/assets/thunder.mp3');
     this.game.load.audio('spike', '../static/assets/spike.mp3');
     this.game.load.audio('rain', '../static/assets/rain.ogg');
     this.game.load.audio('fire', '../static/assets/fire.ogg');
     this.game.load.audio('sizzle', '../static/assets/sizzle.ogg');
+    this.game.load.audio('squeak', '../static/assets/squeak.ogg');
     this.game.load.audio('footsteps', '../static/assets/footsteps.ogg');
     this.game.load.audio('breeze', '../static/assets/breeze.ogg');
     this.game.load.audio('jumpNoise', '../static/assets/jump.ogg');

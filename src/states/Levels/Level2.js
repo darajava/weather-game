@@ -30,8 +30,12 @@ class Level2 extends Phaser.State {
 
     this.breeze = this.game.add.audio('breeze');
     this.breeze.loop = true;
-    this.breeze.volume = 0.5;
+    this.breeze.volume = 0.6;
     this.breeze.play();
+
+    this.squeak = this.game.add.audio('squeak');
+    this.squeak.loop = true;
+    this.squeak.volume = 0.2;
 
     let game = this.game;
 
@@ -53,8 +57,10 @@ class Level2 extends Phaser.State {
     this.blockInitPos = game.width / 2 - game.cache.getImage('block').height * this.densityFactor * 7;
     this.block = game.add.sprite(this.blockInitPos,
       game.height * 0.8,
-      'block'
+      'trolly'
     );
+
+    var idle = this.block.animations.add('rolling', [0, 1, 2, 3, 4]);
 
     game.physics.enable(this.block);
     this.block.body.moves = true;
@@ -90,7 +96,7 @@ class Level2 extends Phaser.State {
     levelStart.fadeIn();
 
     this.oldtext = [
-      'Don\'t try jumping these',
+      'Don\'t try jumping',
       'I said don\'t',
     ]
 
@@ -108,7 +114,7 @@ class Level2 extends Phaser.State {
 
   fixDensity() {
     this.grass.scale.setTo(this.densityFactor, this.densityFactor);
-    this.block.scale.setTo(this.densityFactor * 7, this.densityFactor * 1.5);
+    this.block.scale.setTo(this.densityFactor, this.densityFactor);
     // this.text1.scale.setTo(this.densityFactor, this.densityFactor);
     // this.text2.scale.setTo(this.densityFactor, this.densityFactor);
     // this.text3.scale.setTo(this.densityFactor, this.densityFactor);
@@ -138,6 +144,16 @@ class Level2 extends Phaser.State {
     if (this.block.body.x < this.blockInitPos) {
       this.block.body.x = this.blockInitPos;
       this.block.body.velocity.x = 0;
+    } else {
+      if (Math.abs(this.block.body.velocity.x) > 10 && !this.rolling) {
+        this.rolling = true;
+        this.block.animations.play('rolling', 15, true);
+        this.squeak.play();
+      } else if (Math.abs(this.block.body.velocity.x) < 10) {
+        this.rolling = false;
+        this.block.animations.stop();
+        this.squeak.stop();
+      }
     }
 
     this.game.physics.arcade.collide(this.player.sprite, this.grass);

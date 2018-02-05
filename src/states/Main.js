@@ -9,7 +9,7 @@ class Main extends Phaser.State {
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
     this.densityFactor = window.devicePixelRatio / 3;
 
-    this.game.physics.arcade.gravity.y = 1450 * this.densityFactor;
+    this.game.physics.arcade.gravity.y = 850 * this.densityFactor;
 
     // let levelWidth = this.game.width * 5;
 
