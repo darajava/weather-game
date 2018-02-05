@@ -59,7 +59,7 @@ class Controls {
     this.controlSprites.add(this.jump2);
     this.controlSprites.add(this.weather);
     this.controlSprites.fixedToCamera = true;
-    this.controlSprites.alpha = 0;
+    // this.controlSprites.alpha = 0;
 
     this.left.events.onInputDown.add(() => this.turnOn(['left']));
     this.right.events.onInputDown.add(() => this.turnOn(['right']));
