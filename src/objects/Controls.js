@@ -12,31 +12,31 @@ class Controls {
       weather: false,
     }
 
-    this.left = this.game.add.tileSprite(0,
-      0,
-      this.game.width / 3,
-      this.game.height,
-      'left'
-    );
+    // this.left = this.game.add.tileSprite(0,
+    //   0,
+    //   this.game.width / 3,
+    //   this.game.height,
+    //   'left'
+    // );
 
-    this.right = this.game.add.tileSprite(2 * this.game.width / 3,
-      0,
-      this.game.width / 3,
-      this.game.height,
-      'right'
-    );
+    // this.right = this.game.add.tileSprite(2 * this.game.width / 3,
+    //   0,
+    //   this.game.width / 3,
+    //   this.game.height,
+    //   'right'
+    // );
 
     this.jump1 = this.game.add.tileSprite(0,
       0,
       this.game.width / 3,
-      this.game.height / 3,
+      this.game.height,
       'left'
     );
 
     this.jump2 = this.game.add.tileSprite(2 * this.game.width / 3,
       0,
       this.game.width / 3,
-      this.game.height / 3,
+      this.game.height,
       'jump'
     );
 
@@ -47,40 +47,40 @@ class Controls {
       'weather'
     );
 
-    this.left.inputEnabled = true;
-    this.right.inputEnabled = true;
+    // this.left.inputEnabled = true;
+    // this.right.inputEnabled = true;
     this.jump1.inputEnabled = true;
     this.jump2.inputEnabled = true;
     this.weather.inputEnabled = true;
 
-    this.controlSprites.add(this.left);
-    this.controlSprites.add(this.right);
+    // this.controlSprites.add(this.left);
+    // this.controlSprites.add(this.right);
     this.controlSprites.add(this.jump1);
     this.controlSprites.add(this.jump2);
     this.controlSprites.add(this.weather);
     this.controlSprites.fixedToCamera = true;
     this.controlSprites.alpha = 0;
 
-    this.left.events.onInputDown.add(() => this.turnOn(['left']));
-    this.right.events.onInputDown.add(() => this.turnOn(['right']));
+    // this.left.events.onInputDown.add(() => this.turnOn(['left']));
+    // this.right.events.onInputDown.add(() => this.turnOn(['right']));
 
-    this.jump1.events.onInputOver.add(() => this.turnOn(['jump', 'left']));
-    this.jump2.events.onInputOver.add(() => this.turnOn(['jump', 'right']));
+    // this.jump1.events.onInputOver.add(() => this.turnOn(['jump']));
+    // this.jump2.events.onInputOver.add(() => this.turnOn(['jump']));
 
     this.jump1.events.onInputDown.add(() => this.turnOn(['jump']));
     this.jump2.events.onInputDown.add(() => this.turnOn(['jump']));
-    this.jump1.events.onInputOver.add(() => this.turnOn(['jump', 'left']));
-    this.jump2.events.onInputOver.add(() => this.turnOn(['jump', 'right']));
+    // this.jump1.events.onInputOver.add(() => this.turnOn(['jump', 'left']));
+    // this.jump2.events.onInputOver.add(() => this.turnOn(['jump', 'right']));
 
     this.weather.events.onInputDown.add(() => this.turnOn(['weather']));
 
-    this.left.events.onInputUp.add(() => this.turnOff(['jump', 'left']));
-    this.right.events.onInputUp.add(() => this.turnOff(['jump', 'right']));
+    // this.left.events.onInputUp.add(() => this.turnOff(['jump', 'left']));
+    // this.right.events.onInputUp.add(() => this.turnOff(['jump', 'right']));
 
-    this.jump1.events.onInputUp.add(() => this.turnOff(['jump', 'left']));
-    this.jump2.events.onInputUp.add(() => this.turnOff(['jump', 'right']));
-    this.jump1.events.onInputOut.add(() => this.turnOff(['jump']));
-    this.jump2.events.onInputOut.add(() => this.turnOff(['jump']));
+    this.jump1.events.onInputUp.add(() => this.turnOff(['jump']));
+    this.jump2.events.onInputUp.add(() => this.turnOff(['jump']));
+    // this.jump1.events.onInputOut.add(() => this.turnOff(['jump']));
+    // this.jump2.events.onInputOut.add(() => this.turnOff(['jump']));
 
     // Force out on up https://github.com/photonstorm/phaser-ce/issues/443
     this.game.input.onUp.add((pointer) => {

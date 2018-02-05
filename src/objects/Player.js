@@ -12,7 +12,7 @@ class Player {
 
     this.densityFactor = window.devicePixelRatio / 3;
 
-    this.maxSpeed = 850 * this.densityFactor;
+    this.maxSpeed = 550 * this.densityFactor;
     this.speed = this.maxSpeed;
     this.pushSpeed = this.speed * 0.7;
     this.jumpSpeed = 700 * this.densityFactor;
@@ -59,33 +59,33 @@ class Player {
       this.speed = this.maxSpeed;
     }
 
-    if (controls.right) {
-      // this.player.body.velocity.x += acceleration;
-      // if (this.player.body.velocity.x > this.speed) {
-        this.player.body.velocity.x = this.speed;
-      // }
-      this.player.scale.setTo(this.densityFactor * 4, this.densityFactor * 4);
-      this.playFootsteps();
-      this.player.animations.play('run', 15, true);
-    } else if (controls.left) {
-      // this.player.body.velocity.x -= acceleration;
-      // if (this.player.body.velocity.x < -this.speed) {
-        this.player.body.velocity.x = -this.speed;
-      // }
-      this.playFootsteps();
-      this.player.scale.setTo(-this.densityFactor * 4, this.densityFactor * 4);
-      this.player.animations.play('run', 15, true);
-    } else {
-      // if (this.player.body.velocity.x < -acceleration) {
-      //   this.player.body.velocity.x += acceleration;
-      // } else if (this.player.body.velocity.x > acceleration) {
-      //   this.player.body.velocity.x -= acceleration;
-      // } else {
-        this.player.body.velocity.x = 0;
-        this.stopFootsteps();
-        this.player.animations.play('idle', 10, true);
-      // }
-    }
+    this.player.body.velocity.x = this.speed;
+    // if (controls.right) {
+    //   // this.player.body.velocity.x += acceleration;
+    //   // if (this.player.body.velocity.x > this.speed) {
+    //   // }
+    //   this.player.scale.setTo(this.densityFactor * 4, this.densityFactor * 4);
+    //   this.playFootsteps();
+    //   this.player.animations.play('run', 15, true);
+    // } else if (controls.left) {
+    //   // this.player.body.velocity.x -= acceleration;
+    //   // if (this.player.body.velocity.x < -this.speed) {
+    //     this.player.body.velocity.x = -this.speed;
+    //   // }
+    //   this.playFootsteps();
+    //   this.player.scale.setTo(-this.densityFactor * 4, this.densityFactor * 4);
+    //   this.player.animations.play('run', 15, true);
+    // } else {
+    //   // if (this.player.body.velocity.x < -acceleration) {
+    //   //   this.player.body.velocity.x += acceleration;
+    //   // } else if (this.player.body.velocity.x > acceleration) {
+    //   //   this.player.body.velocity.x -= acceleration;
+    //   // } else {
+    //     this.player.body.velocity.x = 0;
+    //     this.stopFootsteps();
+    //     this.player.animations.play('idle', 10, true);
+    //   // }
+    // }
 
     if (!this.player.body.touching.down) {
       this.player.animations.play('idle', 10, true);
