@@ -28,7 +28,7 @@ class Main extends Phaser.State {
 
     // this.x = 0;
 
-    this.game.state.start("Level2");
+    this.game.state.start("Level1");
   }
 
   // update() {
